@@ -1,0 +1,57 @@
+openapi: 3.1.0
+info:
+  title: LinkedIn Scraper
+  version: '1.0'
+paths:
+  /search:
+    post:
+      operationId: searchLinkedInRoles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organization:
+                  type: string
+                  description: Company name to search
+                jobTitles:
+                  type: array
+                  items:
+                    type: string
+                  description: List of job titles
+              required:
+                - organization
+                - jobTitles
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        jobTitle:
+                          type: string
+                        linkedinUrl:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      organization:
+                        type: string
+                      jobTitles:
+                        type: array
+                        items:
+                          type: string
+                      returned:
+                        type: integer
+components: {}
